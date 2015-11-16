@@ -32,6 +32,16 @@ def stop
   end
 end
 
+def parse_desc description
+  if description
+    if m = description.match(/\[.+? \((.+)\)\]/)
+      m[1]
+    else
+      description
+    end
+  end
+end
+
 opts = Slop.parse do |o|
   o.string '-d', '--description', 'description of the timer'
   o.string '-m', '--mode',        'mode (start or stop)'
@@ -41,7 +51,8 @@ end
 
 case opts[:mode]
 when 'start'
-  res = start opts[:description], opts[:project]
+  desc = parse_desc(opts[:description])
+  res  = start desc, opts[:project]
   puts "Start a timer - #{res}"
 when 'stop'
   res = stop
