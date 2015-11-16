@@ -14,6 +14,9 @@ def start description, project_name=nil, wid=OrgToggl.main_workspace_id
   if project_name
     if project = api.projects(wid).find{ |pj| pj["name"] == project_name }
       pid = project['id']
+    else
+      # pid = api.create_project('name' => project_name, 'wid' => wid)['id']
+      pid = nil
     end
   end
   api.start_time_entry('description' => description,
