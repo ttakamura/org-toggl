@@ -1,23 +1,22 @@
-class OrgToggl
+module OrgToggl
   class << self
     def api_token
       ENV['TOGGL_TOKEN']
     end
 
     def api
-      @api ||= TogglV8::API.new(api_token)
+      @api ||= OrgToggl::API.new(api_token)
     end
 
-    def user
-      @user ||= api.me
-    end
-
-    def workspaces
-      @workspaces ||= api.my_workspaces(user)
+    def db
+      @db ||= OrgToggl::DB.new("db/toggl.yaml")
     end
 
     def main_workspace_id
-      workspaces.first['id']
+      api.workspaces.first['id']
     end
   end
 end
+
+require 'org_toggl/api'
+require 'org_toggl/db'

@@ -9,29 +9,6 @@ def api
   OrgToggl.api
 end
 
-def start description, project_name=nil, wid=OrgToggl.main_workspace_id
-  pid = nil
-  if project_name
-    if project = api.projects(wid).find{ |pj| pj["name"] == project_name }
-      pid = project['id']
-    else
-      # pid = api.create_project('name' => project_name, 'wid' => wid)['id']
-      pid = nil
-    end
-  end
-  api.start_time_entry('description' => description,
-                       'pid'         => pid,
-                       'wid'         => wid)
-end
-
-def stop
-  if timer = api.get_current_time_entry
-    api.stop_time_entry(timer['id'])
-  else
-    "Current timer is not running"
-  end
-end
-
 def parse_desc description
   if description
     if m = description.match(/\[.+? \((.+)\)\]/)
@@ -52,11 +29,14 @@ end
 case opts[:mode]
 when 'start'
   desc = parse_desc(opts[:description])
-  res  = start desc, opts[:project]
+  res  = api.start desc, opts[:project]
   puts "Start a timer - #{res}"
 when 'stop'
-  res = stop
+  res = api.stop
   puts "Stop the timer - #{res}"
+when 'debug'
+  debugger
+  puts "Time to debug..."
 else
   puts opts
 end
