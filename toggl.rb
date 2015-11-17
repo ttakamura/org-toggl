@@ -11,6 +11,10 @@ def api
   OrgToggl.api
 end
 
+def cal
+  OrgToggl.calendar
+end
+
 def parse_desc description
   if description
     if m = description.match(/\[.+? \((.+)\)\]/)
@@ -36,6 +40,11 @@ when 'start'
 when 'stop'
   res = api.stop
   puts "Stop the timer - #{res}"
+when 'sync_calendar'
+  unsync_logs = api.time_entries.find_all{ |l| !l.logged_to_calendar? && l.done? }
+  unsync_logs.each do |log|
+    cal.post_log log
+  end
 when 'debug'
   debugger
   puts "Time to debug..."

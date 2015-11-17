@@ -21,6 +21,10 @@ module OrgToggl
       Time.parse @entry['stop']
     end
 
+    def done?
+      !!@entry['stop']
+    end
+
     def logged_to_calendar! cal_event
       db[db_key] = {'calendar_id' => cal_event.id}
     end
