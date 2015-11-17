@@ -4,6 +4,12 @@ GEM
     TimezoneParser (0.2.0)
       insensitive_hash
       tzinfo
+    activesupport (4.2.5)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
     addressable (2.3.8)
     awesome_print (1.6.1)
     byebug (8.2.0)
@@ -15,10 +21,12 @@ GEM
       TimezoneParser (~> 0.2.0)
       json (~> 1.8)
       signet (~> 0.6)
+    i18n (0.7.0)
     insensitive_hash (0.3.3)
     json (1.8.3)
     jwt (1.5.2)
     logger (1.2.8)
+    minitest (5.8.2)
     multi_json (1.11.2)
     multipart-post (2.0.0)
     oj (2.13.0)
@@ -41,6 +49,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   awesome_print
   byebug
   dotenv

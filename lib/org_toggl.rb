@@ -25,3 +25,4 @@ end
 require 'org_toggl/api'
 require 'org_toggl/db'
 require 'org_toggl/calendar'
+require 'org_toggl/log'

@@ -12,6 +12,12 @@ module OrgToggl
       @workspaces ||= api.my_workspaces(user)
     end
 
+    def time_entries start_time=nil, end_time=nil
+      api.get_time_entries(start_time, end_time).map do |entry|
+        OrgToggl::Log.new(entry)
+      end
+    end
+
     def start description, project_name=nil, wid=OrgToggl.main_workspace_id
       pid = nil
       if project_name

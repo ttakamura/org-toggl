@@ -1,5 +1,7 @@
 require 'bundler'
 Bundler.require
+require 'active_support'
+require 'active_support/core_ext'
 Dotenv.load
 
 $LOAD_PATH << File.dirname(__FILE__) + "/lib"

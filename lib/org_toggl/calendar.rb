@@ -7,6 +7,12 @@ module OrgToggl
                                   :client_secret => client_sec,
                                   :calendar      => calendar_id,
                                   :redirect_url  => "urn:ietf:wg:oauth:2.0:oob")
+      @authorized = false
+    end
+
+    def try_authorize
+      return true if @authorized
+      authorize
     end
 
     def authorize refresh_token=ENV['CAL_REFRESH_TOKEN']
@@ -15,6 +21,18 @@ module OrgToggl
       else
         interactive_authorize
       end
+      @authorized = true
+    end
+
+    def post_log log
+      try_authorize
+      event = cal.create_event do |e|
+        e.title      = log.description
+        e.start_time = log.start_at
+        e.end_time   = log.stop_at
+      end
+      p event
+      log.logged_to_calendar! event
     end
 
     # --------- for setup --------------------------------------------------
