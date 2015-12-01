@@ -45,6 +45,7 @@ when 'sync_calendar'
   unsync_logs.each do |log|
     cal.post_log log
   end
+  puts "Success sync to calender"
 when 'debug'
   debugger
   puts "Time to debug..."
