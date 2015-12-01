@@ -31,7 +31,7 @@ module OrgToggl
         e.start_time = log.start_at
         e.end_time   = log.stop_at
       end
-      p event
+      # p event
       log.logged_to_calendar! event
     end
 
