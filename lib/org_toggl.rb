@@ -19,6 +19,10 @@ module OrgToggl
     def main_workspace_id
       api.workspaces.first['id']
     end
+
+    def logger
+      @logger ||= Logger.new('log/toggl.log')
+    end
   end
 end
 

@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'bundler'
 Bundler.require
 require 'active_support'
@@ -17,7 +18,11 @@ end
 
 def parse_desc description
   if description
+    # input =>                 [0:00 (英辞郎 for Mac.dict を買う)]
     if m = description.match(/\[.+? \((.+)\)\]/)
+      m[1]
+    # input =>                    [0:37/2:00] (session変数など、古いルーチンを廃止)
+    elsif m = description.match(/\[.+?\] \((.+)\)/)
       m[1]
     else
       description
