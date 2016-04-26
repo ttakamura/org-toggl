@@ -18,6 +18,7 @@ end
 
 def parse_desc description
   if description
+    OrgToggl.logger.error("parse_desc# #{ description }")
     # input =>                 [0:00 (英辞郎 for Mac.dict を買う)]
     if m = description.match(/\[.+? \((.+)\)\]/)
       m[1]
